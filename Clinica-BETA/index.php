@@ -30,17 +30,17 @@
     
     if(ISSET($_POST["Enviar"])){
 
-    include("Basedatos.php");
-    $conexionbd=conectar_bd();
+    require_once "./Basedatos.php";
+    $conexionbd=mysqli_connect(server,user,password,database,port);
     $Usuario=$_POST["Usuario"];
     $Contrasena=$_POST["Contrasena"];
 
     $query="SELECT * FROM `USUARIOS` WHERE ID=".$Usuario." AND CONTRASENA='".$Contrasena."';";
-    $ConsultaUsuarios=mysql_query($query,$conexionbd);
-        if($res=mysql_fetch_assoc($ConsultaUsuarios)){
+    $ConsultaUsuarios=mysqli_query($conexionbd,$query);
+        if($res=mysqli_fetch_assoc($ConsultaUsuarios)){
             $query2="SELECT `SECTOR` FROM `USUARIOS` WHERE ID=$Usuario";
-            $ConsultaSector=mysql_query($query2,$conexionbd);
-		$r=mysql_fetch_assoc($ConsultaSector);
+            $ConsultaSector=mysqli_query($conexionbd,$query2);
+		$r=mysqli_fetch_assoc($ConsultaSector);
 		if($r["SECTOR"]=="Administrador"){
 		header('Location: Administrador.php');
 		}

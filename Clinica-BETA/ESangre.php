@@ -45,21 +45,21 @@ padding:2px;
 <?php
 $SALIDAout="";
 $CLAVE="";
-include('Basedatos.php');
+require_once './Basedatos.php';
 if(ISSET($_POST["enviar"])){
-$conexionbd=conectar_bd();
-$conex=conectar_bd();
-
+$conexionbd=mysqli_connect(server,user,password,database,port);
+$conex=mysqli_connect(server,user,password,database,port);
+$db=database;
 $CLAVE=$_POST["CLAVE"];
 $query="SELECT * FROM `SANGRE` WHERE CLAVE='".$CLAVE."';";
-$RESULTADO=mysql_query($query,$conexionbd);
+$RESULTADO=mysqli_query($conexionbd,$query);
 
 $query2="SELECT * FROM `ALTAS` WHERE CLAVE='".$CLAVE."';";
-$conexionbd2=conectar_bd();
-$Resultado2=mysql_query($query2,$conexionbd2);
+$conexionbd2=mysqli_connect(server,user,password,database,port);
+$Resultado2=mysqli_query($conexionbd2,$query2);
 
-$REGISTRO=mysql_fetch_assoc($RESULTADO);
-$DATOS=mysql_fetch_assoc($Resultado2);
+$REGISTRO=mysqli_fetch_assoc($RESULTADO);
+$DATOS=mysqli_fetch_assoc($Resultado2);
 if($REGISTRO && $DATOS){
 $FECHA=$DATOS["FECHA"];
 $HORA=$DATOS["HORA"];
@@ -177,9 +177,9 @@ Comentarios:<br/>
 </div>
 
 <?php
-$conexion=conectar_bd();
-$q2="INSERT INTO `IMPRIMIR`(`ID`,`CLAVE`,`ESTUDIO`,`TEXTO`) VALUES('','".$CLAVE."','1','$SALIDAout');";
-$resultado5=mysql_query($q2,$conexion);
+$conexion=mysqli_connect(server,user,password,database);
+$q2="INSERT INTO `$db`.`IMPRIMIR`(`ID`,`CLAVE`,`ESTUDIO`,`TEXTO`) VALUES('0','".$CLAVE."','1','$SALIDAout');";
+$resultado5=mysqli_query($conexion,$q2);
 ?>
 <a href="Imprimir.php?CLAVE=<?php echo $CLAVE; ?>&ESTUDIO=1" target="_blank" class="boton">Imprimir</a>
 

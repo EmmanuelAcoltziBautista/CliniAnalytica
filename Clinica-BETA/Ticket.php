@@ -20,15 +20,15 @@
 
 
 <?php
-include("Basedatos.php");
+require_once "./Basedatos.php";
 $CLAVE="";
 $MONTOS="";
 if(ISSET($_POST["Enviar"])){
-$conexionbd=conectar_bd();
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $CLAVE=$_POST["CLAVE"];
 $query="SELECT * FROM `TICKET` WHERE CLAVE='".$CLAVE."'";
-$RESULTADO=mysql_query($query,$conexionbd);
-if($registro=mysql_fetch_assoc($RESULTADO)){
+$RESULTADO=mysqli_query($conexionbd,$query);
+if($registro=mysqli_fetch_assoc($RESULTADO)){
 $MONTOS=$registro["MONTO"];
 $concepto=$registro["CONCEPTO"];
 //echo "<p class >El registro de ".$registro["CLAVE"]." tiene un monto de ".$registro["MONTO"]." CONCEPTO:".$registro["CONCEPTO"];
@@ -61,13 +61,13 @@ $MONTOS=0;
 if(ISSET($_POST['PAGO'])){
 $CLAVE1=$_POST['CLAVE1'];
 $MONTO1=$_POST['MONTO1'];
-$conexionbd5=conectar_bd();
+$conexionbd5=mysqli_connect(server,user,password,database,port);
 $query6='UPDATE `TICKET` SET CONCEPTO="Pagado" WHERE CLAVE="'.$CLAVE1.'";';
 //echo $query6;
-$resultado1=mysql_query($query6,$conexionbd5);
-$conexion6=conectar_bd();
+$resultado1=mysqli_query($conexionbd5,$query6);
+$conexion6=mysqli_connect(server,user,password,database,port);
 $query7='UPDATE `GANANCIAS` SET GANANCIAS=GANANCIAS+'.$MONTO1.' WHERE ID=1';
-$SALIDAG=mysql_query($query7,$conexion6);
+$SALIDAG=mysqli_query($conexion6,$query7);
 if($SALIDAG && $resultado1){
 echo'<script>alert("El pago se realizo con exito");</script>';
 }

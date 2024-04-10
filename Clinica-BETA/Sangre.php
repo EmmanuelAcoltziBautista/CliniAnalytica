@@ -1,6 +1,4 @@
-<?php
-error_reporting(0);
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +21,7 @@ error_reporting(0);
 
 
 <?php
-include("Basedatos.php");
+require_once "Basedatos.php";
 $CLAVE="";
 $GLUCOSA="";
 
@@ -45,11 +43,11 @@ $RDW_CV="";
 $VMP="";
 $COMENTARIOS=$registro["COMENTARIOS"];
 if(ISSET($_POST["Enviar"])){
-$conexionbd=conectar_bd();
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $CLAVE=$_POST["CLAVE"];
 $query="SELECT * FROM `SANGRE` WHERE CLAVE='".$CLAVE."'";
-$RESULTADO=mysql_query($query,$conexionbd);
-if($registro=mysql_fetch_assoc($RESULTADO)){
+$RESULTADO=mysqli_query($conexionbd,$query);
+if($registro=mysqli_fetch_assoc($RESULTADO)){
 
 $CLAVE=$registro["CLAVE"];
 $GLUCOSA=$registro["GLUCOSA"];
@@ -160,14 +158,14 @@ $RDW_CV1=$_POST["RDW-CV"];
 $VMP1=$_POST["VMP"];
 $COMENTARIOS1=$_POST["COMENTARIOS"];
 
-$conexionbd5=conectar_bd();
+$conexionbd5=mysqli_connect(server,user,password,database,port);
 $AG='GLUCOSA="'.$GLUCOSA1.'", BUN="'.$BUN1.'", UREA="'.$UREA1.'", CREATININA="'.$CREATININA1.'", ACIDO_URICO="'.$ACIDO_URICO1.'", COLESTEROL_TOTAL="'.$COLESTEROL_TOTAL1.'",TRIGLICERIDOS="'.$TRIGLICERIDOS1.'", LEUCOCITOS="'.$LEUCOCITOS1.'", ERITROCITOS="'.$ERITROCITOS1.'", HEMOGLOBINA="'.$HEMOGLOBINA1.'", HEMATOCRITO="'.$HEMATOCRITO1.'", VCM="'.$VCM1.'", HCM="'.$HCM1.'", CHCM="'.$CHCM1.'", PLAQUETAS="'.$PLAQUETAS1.'",RDW_CV="'.$RDW_CV1.'", VMP="'.$VMP1.'", COMENTARIOS="'.$COMENTARIOS1.'"';
 $query6="UPDATE `SANGRE` SET ".$AG." WHERE CLAVE='".$CLAVE1."';";
 
 
 //echo $query6;
-$resultado1=mysql_query($query6,$conexionbd5);
-$conexion6=conectar_bd();
+$resultado1=mysqli_query($conexionbd5,$query6);
+$conexion6=mysqli_connect(server,user,password,database,port);
 //$query7='UPDATE `GANANCIAS` SET GANANCIAS=GANANCIAS+'.$MONTO1.' WHERE ID=1';
 //$SALIDAG=mysql_query($query7,$conexion6);
 if($resultado1){

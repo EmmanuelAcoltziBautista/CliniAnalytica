@@ -1,8 +1,8 @@
 <?php
-include('Basedatos.php');
-$conexionbd=conectar_bd();
+require_once './Basedatos.php';
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $query="SELECT * FROM `PRECIOS`;";
-$resultado=mysql_query($query,$conexionbd);
+$resultado=mysqli_query($conexionbd,$query);
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ padding:3px;
 </tr>
 <ul>
 <?php
-while($r1=mysql_fetch_assoc($resultado)){
+while($r1=mysqli_fetch_assoc($resultado)){
 echo"<tr><td>".$r1["ESTUDIO"]."</td><td>".$r1["PRECIO"]."</td>";
 }
 ?>
@@ -44,9 +44,9 @@ echo"<tr><td>".$r1["ESTUDIO"]."</td><td>".$r1["PRECIO"]."</td>";
 <form method="post">
 <select id="Estudio" name="Estudio">
 <?php
-$cone=conectar_bd();
-$RESU=mysql_query($query,$cone);
-while($r2=mysql_fetch_assoc($RESU)){
+$cone=mysqli_connect(server,user,password,database,port);
+$RESU=mysqli_query($cone,$query);
+while($r2=mysqli_fetch_assoc($RESU)){
 echo"<option value=".$r2["ESTUDIO"].">".$r2["ESTUDIO"]."</option>";
 }
 ?>
@@ -57,13 +57,13 @@ echo"<option value=".$r2["ESTUDIO"].">".$r2["ESTUDIO"]."</option>";
 
 </form>
 <?php
-$conexion11=conectar_bd();
+$conexion11=mysqli_connect(server,user,password,database,port);
 if(ISSET($_POST["Enviar"])){
 $PRECIO=$_POST["Precio"];
 $ESTUDIO=$_POST["Estudio"];
 $query2="UPDATE `PRECIOS` SET PRECIO=".$PRECIO." WHERE ESTUDIO='".$ESTUDIO."';";
 //echo $query2;
-$SALIDA=mysql_query($query2,$conexion11);
+$SALIDA=mysqli_query($conexion11,$query2);
 //if($SALIDA){
 echo"<script>alert('La actualizacion se realizo con exito');document.location.href='Precios.php';</script>";
 //}

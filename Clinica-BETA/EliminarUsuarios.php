@@ -1,8 +1,8 @@
 <?php
-include("Basedatos.php");
-$conexionbd=conectar_bd();
+require_once "Basedatos.php";
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $query="SELECT * FROM `USUARIOS`;";
-$resultado=mysql_query($query,$conexionbd);
+$resultado=mysqli_query($conexionbd,$query);
 
 ?>
 <!DOCTYPE html>
@@ -30,16 +30,16 @@ padding:3px;
 <form method="post">
 <select id="Empleado" name="Empleado">
 <?php
-while($res=mysql_fetch_assoc($resultado)){
+while($res=mysqli_fetch_assoc($resultado)){
 echo"<option value='".$res["NOMBRE"]."'>".$res["NOMBRE"]."</option>";
 }
 ?>
 </select>
 <select id="Sector" name="Sector">
 <?php
-$conexio=conectar_bd();
-$result=mysql_query($query,$conexio);
-while($resulta=mysql_fetch_assoc($result)){
+$conexio=mysqli_connect(server,user,password,database,port);
+$result=mysqli_query($conexio,$query);
+while($resulta=mysqli_fetch_assoc($result)){
 echo"<option value='".$resulta["SECTOR"]."'>".$resulta["SECTOR"]."</option>";
 }
 ?>
@@ -48,11 +48,11 @@ echo"<option value='".$resulta["SECTOR"]."'>".$resulta["SECTOR"]."</option>";
 </form>
 <?php
 if(ISSET($_POST["Enviar"])){
-$conex=conectar_bd();
+$conex=mysqli_connect(server,user,password,database,port);
 $NOMBRE=$_POST["Empleado"];
 $sector=$_POST["Sector"];
 $que="DELETE FROM `USUARIOS` WHERE NOMBRE='".$NOMBRE."' AND SECTOR='".$sector."';";
-$resu=mysql_query($que,$conex);
+$resu=mysqli_query($conex,$que);
 if($resu){
 echo"<script>alert('El empleado fue eliminado');document.location.href='EliminarUsuarios.php';</script>";
 }

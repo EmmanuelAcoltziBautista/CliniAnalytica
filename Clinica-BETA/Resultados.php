@@ -17,13 +17,13 @@
 <input type="submit" id="enviar" name="enviar" value="Mostrar">
 <form>
 <?php
-include('Basedatos.php');
+require_once './Basedatos.php';
 if(ISSET($_POST["enviar"])){
-$conexionbd=conectar_bd();
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $CLAVE=$_POST["CLAVE"];
 $query="SELECT * FROM `ALTAS` WHERE CLAVE='".$CLAVE."';";
-$RESULTADO=mysql_query($query,$conexionbd);
-if($REGISTRO=mysql_fetch_assoc($RESULTADO)){
+$RESULTADO=mysqli_query($conexionbd,$query);
+if($REGISTRO=mysqli_fetch_assoc($RESULTADO)){
 
 $sangre=$REGISTRO["SANGRE"];
 $orina=$REGISTRO["ORINA"];
@@ -33,10 +33,10 @@ if($sangre=="si"){
 
 }
 if($orina=="si"){
-$coneOrina=conectar_bd();
+$coneOrina=mysqli_connect(server,user,password,database,port);
 $qOrina="SELECT * FROM ORINA WHERE CLAVE='".$CLAVE."'";
-$rOrina=mysql_query($qOrina,$coneOrina);
-if($reOrina=mysql_fetch_assoc($rOrina)){
+$rOrina=mysqli_query($coneOrina,$qOrina);
+if($reOrina=mysqli_fetch_assoc($rOrina)){
 
 }
 }

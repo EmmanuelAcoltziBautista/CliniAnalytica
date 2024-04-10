@@ -22,14 +22,14 @@ padding:2px;
 
 </style>
 <?php
-include("Basedatos.php");
+require_once "./Basedatos.php";
 if(!empty($_GET["CLAVE"]) && !empty($_GET["ESTUDIO"])){
-$conexionbd=conectar_bd();
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $CLAVE=$_GET["CLAVE"];
 $ESTUDIO=$_GET["ESTUDIO"];
 $query="SELECT * FROM `IMPRIMIR` WHERE CLAVE='".$CLAVE."' AND ESTUDIO='".$ESTUDIO."';";
-$salida=mysql_query($query,$conexionbd);
-if($si=mysql_fetch_assoc($salida)){
+$salida=mysqli_query($conexionbd,$query);
+if($si=mysqli_fetch_assoc($salida)){
 echo $si["TEXTO"];
 echo "<script>
 window.print();

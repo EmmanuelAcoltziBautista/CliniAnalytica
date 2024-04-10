@@ -45,13 +45,13 @@ padding:3px;
 
 <?php
 
-include('Basedatos.php');
-$conexionbd=conectar_bd();
-$conexion=conectar_bd();
+require_once './Basedatos.php';
+$conexionbd=mysqli_connect(server,user,password,database,port);
+$conexion=mysqli_connect(server,user,password,database,port);
 $q1="SELECT * FROM `USUARIOS`;";
-$RESULT=mysql_query($q1,$conexion);
+$RESULT=mysqli_query($conexion,$q1);
 $VAR1=0;
-while($salida=mysql_fetch_assoc($RESULT)){
+while($salida=mysqli_fetch_assoc($RESULT)){
 $VAR1=$salida["ID"]+1;
 }
 if(ISSET($_POST["Enviar"])){
@@ -61,9 +61,9 @@ $CONTRASENA=$_POST["Contrasena"];
 $SECTOR=$_POST["Sector"];
 
 $query="INSERT INTO `CLINICA`.`USUARIOS` (`ID`,`NOMBRE`,`CONTRASENA`,`SECTOR`)
- VALUES('','".$NOMBRE."','".$CONTRASENA."','".$SECTOR."');";
+ VALUES('0','".$NOMBRE."','".$CONTRASENA."','".$SECTOR."');";
 
-$resultado=mysql_query($query,$conexionbd);
+$resultado=mysqli_query($conexionbd,$query);
 if($resultado){
 
 echo"<script>

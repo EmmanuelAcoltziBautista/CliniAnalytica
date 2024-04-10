@@ -20,7 +20,7 @@
 
 
 <?php
-include("Basedatos.php");
+require_once "Basedatos.php";
 $CLAVE="";
 $CLAVE1="";
 $MONTO="";
@@ -29,11 +29,11 @@ $PH1="";
 $COLOR1="";
 $COM="";
 if(ISSET($_POST["Enviar"])){
-$conexionbd=conectar_bd();
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $CLAVE=$_POST["CLAVE"];
 $query="SELECT * FROM `ORINA` WHERE CLAVE='".$CLAVE."'";
-$RESULTADO=mysql_query($query,$conexionbd);
-if($registro=mysql_fetch_assoc($RESULTADO)){
+$RESULTADO=mysqli_query($conexionbd,$query);
+if($registro=mysqli_fetch_assoc($RESULTADO)){
 $CLAVE1=$registro["CLAVE"];
 $EMBARAZO1=$registro["EMBARAZO"];
 $PH1=$registro["PH"];
@@ -62,14 +62,14 @@ if(ISSET($_POST['Registrar'])){
 
 $CLAVE1=$_POST['CLAVE1'];
 $MONTO1=$_POST['MONTO1'];
-$conexionbd5=conectar_bd();
+$conexionbd5=mysqli_connect(server,user,password,database,port);
 $EMBARAZO=$_POST["Embarazo"];
 $PH=$_POST["ph"];
 $Color=$_POST["Color"];
 $Comentarios=$_POST["Comentarios"];
 $query6='UPDATE `ORINA` SET EMBARAZO="'.$EMBARAZO.'", PH="'.$PH.'", COLOR="'.$Color.'", COMENTARIOS="'.$Comentarios.'"  WHERE CLAVE="'.$CLAVE1.'";';
 //echo $query6;
-$resultado1=mysql_query($query6,$conexionbd5);
+$resultado1=mysqli_query($conexionbd5,$query6);
 if($resultado1){
 echo'<script>alert("El registro se actualizo");</script>';
 }

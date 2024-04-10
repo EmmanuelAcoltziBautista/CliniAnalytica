@@ -20,7 +20,7 @@
 
 
 <?php
-include("Basedatos.php");
+require_once "./Basedatos.php";
 $CLAVE="";
 $CLAVE1="";
 $MONTO="";
@@ -31,11 +31,11 @@ $COM="";
 $OLOR1="";
 $CANTIDAD1="";
 if(ISSET($_POST["Enviar"])){
-$conexionbd=conectar_bd();
+$conexionbd=mysqli_connect(server,user,password,database,port);
 $CLAVE=$_POST["CLAVE"];
 $query="SELECT * FROM `POPO` WHERE CLAVE='".$CLAVE."'";
-$RESULTADO=mysql_query($query,$conexionbd);
-if($registro=mysql_fetch_assoc($RESULTADO)){
+$RESULTADO=mysqli_query($conexionbd,$query);
+if($registro=mysqli_fetch_assoc($RESULTADO)){
 $CLAVE1=$registro["CLAVE"];
 $CANTIDAD1=$registro["CANTIDAD"];
 $OLOR1=$registro["OLOR"];
@@ -76,7 +76,7 @@ $COM=$registro["COMENTARIOS"];
 if(ISSET($_POST['Registrar'])){
 
 $CLAVE1=$_POST['CLAVE1'];
-$conexionbd5=conectar_bd();
+$conexionbd5=mysqli_connect(server,user,password,database,port);
 $CONSISTENCIA=$_POST["Consistencia"];
 $PH=$_POST["ph"];
 $CANTIDAD=$_POST["Cantidad"];
@@ -86,7 +86,7 @@ $Comentarios=$_POST["Comentarios"];
 $query6='UPDATE `POPO` SET CONSISTENCIA="'.$CONSISTENCIA.'", PH="'.$PH.'", COLOR="'.$Color.'", CANTIDAD="'.$CANTIDAD.'",
  OLOR="'.$OLOR.'" , COMENTARIOS="'.$Comentarios.'"  WHERE CLAVE="'.$CLAVE1.'";';
 //echo $query6;
-$resultado1=mysql_query($query6,$conexionbd5);
+$resultado1=mysqli_query($conexionbd5,$query6);
 if($resultado1){
 echo'<script>alert("El registro se actualizo");</script>';
 }
