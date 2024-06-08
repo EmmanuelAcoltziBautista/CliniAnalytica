@@ -1,0 +1,21 @@
+    /*PC*/
+    @media(max-width:991px) {
+        
+    }
+    img{ 
+    /*    width:28%;
+        height:28%;
+    */
+width: 155px;
+height: 155px;}
+/*MOVIL*/
+@media(max-width:767px) {
+        
+
+img{ 
+/*    width:28%;
+    height:28%;
+*/
+width: 125px;
+height: 125px;}
+}
