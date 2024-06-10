@@ -1,3 +1,11 @@
+<?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
 <style type="text/css">
 .Caja{
 border:3px solid #000000;

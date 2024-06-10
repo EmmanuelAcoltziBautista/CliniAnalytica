@@ -1,4 +1,12 @@
 <?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
+<?php
 require_once "../Database/Basedatos.php";
 $conexionbd=mysqli_connect(server,user,password,database,port);
 $query="SELECT * FROM `USUARIOS`;";
@@ -29,7 +37,7 @@ padding:3px;
 <body>
     <div class="gradiente">
 <a href="./">Regresar</a>
-<a href="../">Cerrar sesión</a>
+<a href="../exit/ExitSession.php">Cerrar sesión</a>
 <center>
 <h1>Eliminar empleados</h1>
 <form method="post">

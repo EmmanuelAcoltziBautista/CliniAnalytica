@@ -1,5 +1,6 @@
 <?php
-require_once './Basedatos.php';
+session_start();
+require_once '../Database/Basedatos.php';
 $conexionbd=mysqli_connect(server,user,password,database,port);
 if(!empty($_GET["ID"])){
 $ID=$_GET["ID"];

@@ -1,3 +1,11 @@
+<?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +16,8 @@
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-<a href="Recepcion.php">Regresar</a>
-<a href="index.php">Cerrar secion</a>
+<a href="./">Regresar</a>
+<a href="../exit/ExitSession.php">Cerrar secion</a>
 <center>
 <h1>Resultados</h1>
 <form method="post">

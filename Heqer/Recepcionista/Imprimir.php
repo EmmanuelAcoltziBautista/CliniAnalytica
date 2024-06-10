@@ -1,3 +1,11 @@
+<?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
 <style type="text/css">
 .BoxSalida{
 background:rgb(255,255,255);

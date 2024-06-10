@@ -1,4 +1,12 @@
 <?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
+<?php
 require_once '../Database/Basedatos.php';
 $conexionbd=mysqli_connect(server,user,password,database,port);
 $db=database;
@@ -7,12 +15,35 @@ $db=database;
 <head>
 <title>Heqer</title>
     <link rel="icon" href="../images/usuario.png">
+    <link rel="stylesheet" href="../estilosCss/estilos1.css">
+    <link rel="stylesheet" href="../estilosCss/Iconos.css">
     <link rel="stylesheet" href="../estilosCss/alert.css">
     <script src="../js/alert.js"></script>
+    <style type="text/css">
+
+select{
+font-size:20px;
+margin:3px;
+padding:3px;
+
+}
+select{
+font-size:20px;
+margin:3px;
+padding:3px;
+
+}
+
+table,th,td{
+color:rgb(255,255,255);
+
+}
+</style>
 </head>
 <body>
+    <div class="gradiente">
 <a href="./">Regresar</a>
-<a href="../">Cerrar seción</a>
+<a href="../exit/ExitSession.php">Cerrar seción</a>
 
 <center>
 <h1>Nuevo Estudio</h1>
@@ -23,7 +54,7 @@ $db=database;
 
 <label for="Seccion">Nombre del campo</label>
 <input type="text" id="Seccion" name="Seccion" placeholder="Escribe aqui..." required>
-<input type="submit" id="Enviar" name="Enviar" value="Agregar">
+<input type="submit" id="Enviar" name="Enviar" value="Agregar" class="boton">
 
 </form>
 
@@ -51,7 +82,7 @@ swal.fire({
 
 <form method="post">
 <label for="">Estudio</label>
-<select id="TextoBusqueda" name="TextoBusqueda">
+<select id="TextoBusqueda" name="TextoBusqueda" class="text">
 <?php
 $conexionbd5=mysqli_connect(server,user,password,database,port);
 $query5="SELECT * FROM FESTUDIO;";
@@ -61,7 +92,7 @@ echo "<option value='".$ejecu['ESTUDIO']."'>".$ejecu['ESTUDIO']."</option>";
 }
 ?>
 </select>
-<input type="submit" id="Buscar" name="Buscar" value="Seleccionar">
+<input class="boton" type="submit" id="Buscar" name="Buscar" value="Seleccionar">
 </form>
 
 

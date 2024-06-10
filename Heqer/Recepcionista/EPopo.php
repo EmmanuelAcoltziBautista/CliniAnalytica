@@ -1,3 +1,11 @@
+<?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +44,7 @@ padding:2px;
 <body>
     <div class="gradiente">
 <a href="./">Regresar</a>
-<a href="../">Cerrar sesión</a>
+<a href="../exit/ExitSession.php">Cerrar sesión</a>
 <center>
 <h1>Resultados EMF</h1>
 <form method="post">
@@ -124,7 +132,7 @@ $conexion=mysqli_connect(server,user,password,database);
 $q2='INSERT INTO `IMPRIMIR`(`ID`,`CLAVE`,`ESTUDIO`,`TEXTO`) VALUES("0","'.$CLAVE.'","2","'.$SALIDAout.'");';
 $resultado5=mysqli_query($conexion,$q2);
 ?>
-<a href="Imprimir.php?CLAVE=<?php echo $CLAVE; ?>&ESTUDIO=2" target="_blank" class="boton">Imprimir</a>
+<a href="Imprimir.php?CLAVE=<?php echo $CLAVE; ?>&ESTUDIO=2" target="_blank"><img src="../images/impresora.png" class="print"></a>
 
 </div>
 </body>

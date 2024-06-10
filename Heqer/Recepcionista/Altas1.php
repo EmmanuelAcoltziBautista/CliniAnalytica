@@ -1,4 +1,12 @@
 <?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
+<?php
 require_once "../Database/Basedatos.php";
 $conex1=mysqli_connect(server,user,password,database,port);
 $query="select ESTUDIO, count(ESTUDIO) as Cantidad from FESTUDIO group by ESTUDIO; ";
@@ -8,9 +16,18 @@ $result1=mysqli_query($conex1, $query);
 <head>
 <title>Heqer</title>
     <link rel="icon" href="../images/usuario.png">
-
+<link rel="stylesheet" href="../estilosCss/alert.css">
+<script src="../js/alert.js"></script>
 <link rel="stylesheet" href="../estilosCss/estilos1.css">
 <style type="text/css">
+.print{
+    width:150px;
+    height: 150px;
+}
+.print:hover{
+    width:140px;
+    height: 140px;
+}
 .Caja{
 border:3px solid #000000;
 background:#ffffff;
@@ -38,7 +55,7 @@ font-family:Arial;
 <body>
 <div class="gradiente">
 <a href="./">Regresar</a>
-<a href="../">Cerrar sesión</a>
+<a href="../exit/ExitSession.php">Cerrar sesión</a>
 <center>
 <h1>Altas</h1>
 
@@ -191,14 +208,24 @@ print();
 <?php echo $IMPRESION; ?>
 </p>
 <?php
-//echo"<br/><input type='button' onClick='Imprimir()' value='Imprimir'>";
+echo"
+<script>
+swal.fire({
+    position:'center',
+    title:'Buen trabajo',
+    icon:'success',
+
+
+});
+</script>
+";
 }else{
 echo "no se agrego";
 }
 }
 ?>
 </br>
-<a href='Imp.php?RECIBO=<?php echo $IMPRESION; ?>' target="_blank" class="boton">Imprimir</a>
+<a href='Imp.php?RECIBO=<?php echo $IMPRESION; ?>' target="_blank"><img src="../images/impresora.png" class="print"></a>
 </body>
 </div>
 </html>

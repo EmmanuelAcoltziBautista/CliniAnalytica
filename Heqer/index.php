@@ -55,18 +55,27 @@
             $ConsultaSector=mysqli_query($conexionbd,$query2);
 		$r=mysqli_fetch_assoc($ConsultaSector);
 		if($r["SECTOR"]=="Administrador"){
-		header('Location: ./Administrador');
+            session_start();
+            $_SESSION['user']=$Usuario;
+            $_SESSION['pass']=$Contrasena;
+            header('Location: ./Administrador');
 		}
 		if($r["SECTOR"]=="Laboratorista"){
-		header('Location: ./Laboratorista');
+            session_start();
+            $_SESSION['user']=$Usuario;
+            $_SESSION['pass']=$Contrasena;
+    		header('Location: ./Laboratorista');
 	}
 		if($r["SECTOR"]=="Recepcion"){
-		header('Location: ./Recepcionista');
+            session_start();
+            $_SESSION['user']=$Usuario;
+            $_SESSION['pass']=$Contrasena;
+	    	header('Location: ./Recepcionista');
 	}
-            	if($r["SECTOR"]=="Contador"){
+/*            	if($r["SECTOR"]=="Contador"){
 		header('Location: Contador.php');
 	}
-        }else{
+*/      }else{
             echo"<script>swal.fire(
                 {
                     position:'center',

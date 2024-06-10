@@ -1,3 +1,11 @@
+<?php
+session_start();
+$user=$_SESSION["user"];
+$pass=$_SESSION["pass"];
+if($user==null and $pass==null){
+header('Location:../');
+}
+?>
 <!--Seccion de el laborista-->
 <html>
 <head>
@@ -7,7 +15,7 @@
 <body>
 
 <a href="./">Regresar</a>
-<a href="../">Cerrar seción</a>
+<a href="../exit/ExitSession.php">Cerrar seción</a>
 
 <h1>General</h1>
 <form method="post">

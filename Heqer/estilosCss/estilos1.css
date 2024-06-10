@@ -1,5 +1,13 @@
+.print{
+    width:150px;
+    height: 150px;
+}
+.print:hover{
+    width:140px;
+    height: 140px;
+}
 .gradiente{
-    position:fixed;
+    position:absolute;
 width: 100%;
 top:0px;
 left: 0px;
